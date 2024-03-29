@@ -1,0 +1,69 @@
+create table customers.
+
++---------------------+--------------+------+-----+---------+-------+
+| Field               | Type         | Null | Key | Default | Extra |
++---------------------+--------------+------+-----+---------+-------+
+| customerId          | int          | YES  |     | NULL    |       |
+| customerName        | varchar(30)  | YES  |     | NULL    |       |
+| customercontactName | varchar(30)  | YES  |     | NULL    |       |
+| customerAddress     | varchar(120) | YES  |     | NULL    |       |
+| postalcode          | int          | YES  |     | NULL    |       |
+| country             | varchar(40)  | YES  |     | NULL    |       |
+| GENDER              | varchar(10)  | YES  |     | NULL    |       |
++---------------------+--------------+------+-----+---------+-------+
+insert values in table customers
++------------+--------------+---------------------+----------------------+------------+---------+--------+
+| customerId | customerName | customercontactName | customerAddress      | postalcode | country | GENDER |
++------------+--------------+---------------------+----------------------+------------+---------+--------+
+|          1 | lalit        | subash              | shanti nagar indore  |     457226 | india   | MALE   |
+|          2 | lalita       | subhangi            | kirti nagar indore   |     457331 | india   | FEMALE |
+|          3 | manas        | tom                 | vijay nagar indore   |     423568 | india   | MALE   |
+|          4 | ishan        | lala                | shastri nagar indore |     548965 | india   | MALE   |
+|          5 | kavita       | salar               | geeta nagar indore   |     589654 | india   | FEMALE |
+|          6 | lalit        | subash              | shanti nagar indore  |     457226 | india   | male   |
+|          7 | manas        | tom                 | vijay nagar indore   |     423568 | india   | male   |
+|          8 | rajesh       | kalu                | vijay nagar indore   |     423568 | india   | male   |
+|          9 | ishan        | rohit               | vijay nagar indore   |     423568 | india   | male   |
+|         10 | rohit        | das                 | geeta nagar indore   |     423568 | india   | male   |
++------------+--------------+---------------------+----------------------+------------+---------+--------+
+
+
+
+
+
+Q1.  write a query to  retrive  or show  the data of the table. (select query 1)
+Q2.  write  a query to show the unique data from the table gender coloum.(distinct query 2)
+Q3. write a query to show the  null  values in column .
+Q4.  Write a query to select customers who are not from 'vijay nagar'. (SELECT * FROM students WHERE city <> 'vijay nagar';
+Q5  Write a query to display customer name = manas and customeraddress = vijay nagar. (SELECT * FROM customers WHERE customername = 'manas' AND customeraddress = 'vijay nagar';
+Q6. Write a query to select customers and replace NULL names with suresh. (SELECT name, IFNULL(name, suresh) AS name FROM customers;
+Q7. Write a query to select all customers sorted by customerId in ascending order. (SELECT * FROM students ORDER BY age ASC;)
+Q8. Write a query to select 2 customers starting from the third oldest.(SELECT * FROM students ORDER BY age DESC LIMIT 2 OFFSET 2;).
+Q9. Write a query Combining the names of customers and shopkeeper.(  use union).
+Q10. Write a query Combining the names of customers and shopkeper, including duplicates. (union all).
+Q11. Write a query to query will combine the result sets of customers and shopkepers, including all rows from both tables. (union all).
+Q12. Write a query to select the top 2 oldest customers according to their age. (SELECT * FROM students ORDER BY age DESC LIMIT 2;
+Q13. Write a query to find  to find the common names between customers and shopkepers.(intersection).
+Q14. Write a query to select all customers who have at least one other customers with the same name.(SELECT * FROM students s1 WHERE EXISTS (SELECT 1 FROM students s2 WHERE s1.name = s2.name AND s1.id != s2.id);
+Q15. Write a query to select customers named manas or lalit.(SELECT * FROM students WHERE name = 'Alice' OR name = 'Bob';)
+Q16. Write a query to select students from vijay nagar or shanti nagar.(SELECT * FROM students WHERE city IN ('New York', 'Los Angeles');
+Q17. Write a query to select customers aged between 15 and 19.(SELECT * FROM students WHERE age BETWEEN 20 AND 25;)
+Q18. write a query to display the detail of customer whose customerId = 5. (where)
+Q19. write  a query to display the detail information of table customers.(from)
+Q20.Write a query to select all students who are not from vijay nagar.(not)
+Q21.Write a query to find customers who are active and have placed more than 5 orders.
+Q22. write a query to  use of the INTERSECT operator to find common records from two tables.
+Q23.Write a query to find customers who live in a specific viajy nagar or shanti nagar.
+Q24. Write a query to select customers who are not from 'shanti nagar'.
+Q25.write a query to show the table data(customers).
+
+
+
+
+
+
+
+
+
+ 
+ 

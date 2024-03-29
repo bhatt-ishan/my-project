@@ -1,0 +1,358 @@
+Q1.  Write a MySQL query to create a simple table countries including columns country_id, country_name and region_id.
+
+mysql> CREATE TABLE country(
+    -> countryid int,
+    -> countryName varchar(20),
+    -> regionid int
+    -> );
+mysql> show tables;
++----------------+
+| Tables_in_day2 |
++----------------+
+| country        |
++----------------+
+
+Q2. Write a MySQL query to create a simple table countries including columns country_id, country_name and region_id which is already exists.
+
+
+mysql> CREATE TABLE country(
+    -> countryid int,
+    -> countryName varchar(20),
+    -> regionid int
+    -> );
+mysql> show tables;
++----------------+
+| Tables_in_day2 |
++----------------+
+| country        |
++----------------+
+
+mysql> desc country;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| countryid   | int         | YES  |     | NULL    |       |
+| countryName | varchar(20) | YES  |     | NULL    |       |
+| regionid    | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+Q3.Write a MySQL query to create the structure of a table dup_countries similar to countries.
+
+mysql> desc country;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| countryid   | int         | YES  |     | NULL    |       |
+| countryName | varchar(20) | YES  |     | NULL    |       |
+| regionid    | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+Q4. Write a MySQL query to create a duplicate copy of countries table including structure and data by name dup_countries
+
+
+mysql> create table dumycountrys AS select * from country;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++----------------+
+| Tables_in_day2 |
++----------------+
+| country        |
+| dumycountrys   |
++----------------+
+2 rows in set (0.00 sec)
+
+mysql> desc dumycountrys;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| countryid   | int         | YES  |     | NULL    |       |
+| countryName | varchar(20) | YES  |     | NULL    |       |
+| regionid    | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+Q5. Write a MySQL query to create a table countries set a constraint NOT NULL.
+ CREATE TABLE COUNTRY(
+    -> COUNTRYID INT NOT NULL,
+    -> COUNTRYNAME VARCHAR(20) NOT NULL,
+    -> REGIONID INT NOT NULL
+    -> );
+
+
+mysql> DESC COUNTRY;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| COUNTRYID   | int         | NO   |     | NULL    |       |
+| COUNTRYNAME | varchar(20) | NO   |     | NULL    |       |
+| REGIONID    | int         | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+Q6. Write a MySQL query to create a table named jobs including columns job_id, job_title, min_salary, max_salary and check whether the max_salary amount exceeding the upper limit 25000.
+
+CREATE TABLE Jobs(
+     JobId int,
+     JobTitle varchar(20),
+     JobName  varchar(20),
+     minSalary decimal(6,0),
+     maxSalary decimal(6,0)
+     CHECK(maxSalary<=25000)
+     );
+
+Q7. Write a MySQL query to create a table named countries including columns country_id, country_name and region_id and make sure that no countries except Italy, India and China will be entered in the table.
+
+CREATE TABLE countries (
+    country_id INT AUTO_INCREMENT PRIMARY KEY,
+    country_name VARCHAR(50),
+    region_id INT,
+    CONSTRAINT chk_allowed_countries CHECK (country_name IN ('Italy', 'India', 'China'))
+);
+
+
+Q8.  Write a MySQL query to create a table named job_histry including columns employee_id, start_date, end_date, job_id and department_id and make sure that the value against column end_date will be entered at the time of insertion to the format like '--/--/----'.
+
+ CREATE TABLE jobhistory(
+    -> EMPLOYEE_ID decimal(6,0) NOT NULL,
+    -> START_DATE date NOT NULL,
+    -> END_DATE date NOT NULL
+    -> CHECK (END_DATE LIKE '--/--/----'),
+    -> JOB_ID varchar(10) NOT NULL,
+    -> DEPARTMENT_ID decimal(4,0) NOT NULL
+    -> );
+
+ DESC jobhistory;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| EMPLOYEE_ID   | decimal(6,0) | NO   |     | NULL    |       |
+| START_DATE    | date         | NO   |     | NULL    |       |
+| END_DATE      | date         | NO   |     | NULL    |       |
+| JOB_ID        | varchar(10)  | NO   |     | NULL    |       |
+| DEPARTMENT_ID | decimal(4,0) | NO   |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+
+Q9. Write a MySQL query to create a table named countries including columns country_id,country_name and region_id and make sure that no duplicate data against column country_id will be allowed at the time of insertion.
+
+ ALTER TABLE country MODIFY countryId int unique;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc country;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| countryId   | int         | YES  | UNI | NULL    |       |
+| COUNTRYNAME | varchar(20) | NO   |     | NULL    |       |
+| REGIONID    | int         | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+Q10. Write a MySQL query to create a table named jobs including columns job_id, job_title, min_salary and max_salary, and make sure that, the default value for job_title is blank and min_salary is 8000 and max_salary is NULL will be entered automatically at the time of insertion if no value assigned for the specified columns.
+
+ ALTER TABLE jobhistory MODIFY EMPLOYEE_ID decimal NOT NULL unique;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC JOBHISTORY;
++---------------+---------------+------+-----+---------+-------+
+| Field         | Type          | Null | Key | Default | Extra |
++---------------+---------------+------+-----+---------+-------+
+| EMPLOYEE_ID   | decimal(10,0) | NO   | PRI | NULL    |       |
+| START_DATE    | date          | NO   |     | NULL    |       |
+| END_DATE      | date          | NO   |     | NULL    |       |
+| JOB_ID        | varchar(10)   | NO   |     | NULL    |       |
+| DEPARTMENT_ID | decimal(4,0)  | NO   |     | NULL    |       |
++---------------+---------------+------+-----+---------+-------+
+
+Q11. Write a MySQL query to create a table named countries including columns country_id, country_name and region_id and make sure that the country_id column will be a key field which will not contain any duplicate data at the time of insertion.
+
+  ALTER TABLE country MODIFY countryID int NOT NULL unique;
+
+mysql> DESC COUNTRY;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| countryID   | int         | NO   | PRI | NULL    |       |
+| COUNTRYNAME | varchar(20) | NO   |     | NULL    |       |
+| REGIONID    | int         | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+Q12. Write a MySQL query to create a table countries including columns country_id, country_name and region_id and make sure that the column country_id will be unique and store an auto incremented value.
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------Q1. Write a MySQL query to insert a record with your own value into the table countries against each columns.
+
+
+ insert into country
+    -> values(1,"india",500);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from country;
++-----------+-------------+----------+
+| countryID | COUNTRYNAME | REGIONID |
++-----------+-------------+----------+
+|         1 | india       |      500 |
++-----------+-------------+----------+
+
+
+Q2. Write a MySQL query to insert one row into the table countries against the column country_id and country_name.
+
+CREATE TABLE country(
+     countryid int,
+     countryName varchar(20),
+     regionid int 
+    );
+
+
+ insert into country
+    -> values(1,"Australiya");
++-----------+-------------+
+| countryid | countryName |
++-----------+-------------+
+|         1 | Australiya  |
++-----------+-------------+
+      
+
+Q3. Write a MySQL query to create duplicate of countries table named country_new with all structure and data.
+
+
+Q4. Write a MySQL query to insert NULL values against region_id column for a row of countries table.
+
+ insert into country
+    -> values(1,"Australiya", null );
+
+ select * from country;
++-----------+-------------+----------+
+| countryid | countryName | regionid |
++-----------+-------------+----------+
+|         1 | Australiya  |     NULL |
++-----------+-------------+----------+
+1 row in set (0.00 sec)
+
+Q5. Write a MySQL query to insert 3 rows by a single insert statement.
+
+ insert into country
+    -> values(1,"INDIA",500),(2,"USA",600),(3,"ENGLIND",700);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM COUNTRY;
++-----------+-------------+----------+
+| countryid | countryName | regionid |
++-----------+-------------+----------+
+|         1 | INDIA       |      500 |
+|         2 | USA         |      600 |
+|         3 | ENGLIND     |      700 |
++-----------+-------------+----------+
+
+Q6.  Write a MySQL query insert rows from country_new table to countries table.
+
+ insert into country
+    -> SELECT * FROM  dummycountry_new;
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from  dummycountry_new;
++-----------+-------------+----------+
+| countryid | countryName | regionid |
++-----------+-------------+----------+
+|         1 | INDIA       |      500 |
+|         2 | USA         |      600 |
+|         3 | ENGLIND     |      700 |
++-----------+-------------+----------+
+
+Q7.  Write a MySQL query to insert one row in jobs table to ensure that no duplicate value will be entered in the job_id column.
+
+insert into jobs
+ values(1,"peon",8000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from jobs;
++-------+----------+-----------+
+| JobId | JobTitle | minSalary |
++-------+----------+-----------+
+|     1 | peon     |      8000 |
++-------+----------+-----------+
+
+
+Q8. Write a MySQL query to insert one row in jobs table to ensure that no duplicate value will be entered in the job_id column.
+
+
+insert into jobs
+ values(1,"peon",8000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from jobs;
++-------+----------+-----------+
+| JobId | JobTitle | minSalary |
++-------+----------+-----------+
+|     1 | peon     |      8000 |
++-------+----------+-----------+
+
+
+Q9. Write a MySQL query to insert a record into the table countries to ensure that, a country_id and region_id combination will be entered once in the table.
+
+ALTER TABLE country
+ADD Primary Key(country id, region id);
+ 
+ ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'id, region id)' at line 2
+
+Q10.  Write a MySQL query to insert rows into the table countries in which the value of country_id column will be unique and auto incremented.
+
+ insert into country
+    -> values(1,"india",5);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into country
+    -> values("USA",7);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into country
+    -> values(2,"USA",7);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into country
+    -> values("AUSTRALIYA",9);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> select*from country;
++------------+--------------+-----------+
+| COUNTRY_ID | COUNTRY_NAME | REGION_ID |
++------------+--------------+-----------+
+|          1 | india        |         5 |
+|          2 | USA          |         7 |
++------------+--------------+-----------+
+
+
+Q12. Write a MySQL query to insert rows in the job_history table in which one column job_id is containing those values which are exists in job_id column of jobs table.
+
+CREATE TABLE  jobhistory ( 
+JOB_ID integer NOT NULL UNIQUE, 
+JOB_TITLE varchar(35) NOT NULL DEFAULT ' ', 
+MIN_SALARY decimal(6,0) DEFAULT 8000, 
+MAX_SALARY decimal(6,0) DEFAULT 20000
+
+);
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q1. Write a MySQL statement to change the email column of employees table with 'not available' for all employees.
+
+        update employee
+       set emailId = "not available";
+
++------------+--------------+--------------------+----------------+--------+---------------+--------+
+| employeeNo | employeename | employeeAddress    | employeesalary | deptno | emailId       | gender |
++------------+--------------+--------------------+----------------+--------+---------------+--------+
+|          2 | arif         | prem nagar indore  |         500.00 |     20 | not available | male   |
+|          3 | sahil        | ashok nagar indore |         900.00 |     30 | not available | male   |
+|          4 | rohit        | bharat nagar       |         800.00 |     20 | not available | male   |
+|          5 | swapnil      | udaay nagar indore |         500.00 |     30 | not available | male   |
++------------+--------------+--------------------+----------------+--------+---------------+--------+
+
+
+Q2. 
+
+
+
+

@@ -1,0 +1,975 @@
+list of operators in sql 
+
+
+
+1. SELECT: Retrieves data from one or more table
+   select * from student;
++-----+-------+-----------------+--------+--------------------------+------+
+| sId | sname | saddress        | scity  | semail                   | age  |
++-----+-------+-----------------+--------+--------------------------+------+
+|   1 | ishan | shanti nagar    | indore | ishanbhatt1234@gmail.com |   21 |
+|   2 | manas | prashanti nagar | indore | manasj1234@gmail.com     |   23 |
+|   3 | sumit | kali nagar      | indore | sumitr1234@gmail.com     |   23 |
+|   4 | priya | geeta nagar     | indore | priyarani1234@gmail.com  |   19 |
+|   5 | geeta | priya nagar     | indore | geetanjali1234@gmail.com |   15 |
++-----+-------+-----------------+--------+--------------------------+------+
+
+2.  DISTINCT: Returns unique values in the result set.
+
+ SELECT DISTINCT name, age FROM students;
++---------+------+
+| name    | age  |
++---------+------+
+| Alice   |   22 |
+| Bob     |   23 |
+| Charlie |   21 |
+
+3.FROM: Specifies the table(s) from which to retrieve data.
+
+ select * from students;
++------+---------+------+-------------+
+| id   | name    | age  | city        |
++------+---------+------+-------------+
+|    1 | Alice   |   22 | New York    |
+|    2 | Bob     |   23 | Los Angeles |
+|    3 | Alice   |   22 | New York    |
+|    4 | Charlie |   21 | Chicago     |
+|    5 | Alice   |   22 | New York    |
++------+---------+------+-------------+
+4. WHERE: Filters rows based on specified conditions.
+
+select * from students where id = 2;
++------+------+------+-------------+
+| id   | name | age  | city        |
++------+------+------+-------------+
+|    2 | Bob  |   23 | Los Angeles |
++------+------+------+-------------+
+
+5. <>: This operator is used to negate a condition
+
+ SELECT * FROM students WHERE city <> 'New York';
++------+---------+------+-------------+
+| id   | name    | age  | city        |
++------+---------+------+-------------+
+|    2 | Bob     |   23 | Los Angeles |
+|    4 | Charlie |   21 | Chicago     |
++------+---------+------+-------------+
+ 
+6. IS: This operator is used for checking if a value is NULL.
+
+ SELECT * FROM students WHERE city IS NULL;
+Empty set (0.00 sec)
+
+
+7. BETWEEN: This operator is used to select values within a specified range.
+
+ SELECT * FROM students WHERE age BETWEEN 20 AND 25;
++------+---------+------+-------------+
+| id   | name    | age  | city        |
++------+---------+------+-------------+
+|    1 | Alice   |   22 | New York    |
+|    2 | Bob     |   23 | Los Angeles |
+|    3 | Alice   |   22 | New York    |
+|    4 | Charlie |   21 | Chicago     |
+|    5 | Alice   |   22 | New York    |
++------+---------+------+-------------+
+
+8. IN: This operator is used to specify multiple possible values for a column.
+ SELECT * FROM students WHERE city IN ('New York', 'Los Angeles');
++------+---------+------+-------------+
+| id   | name    | age  | city        |
++------+---------+------+-------------+
+|    1 | Alice   |   22 | New York    |
+|    2 | Bob     |   23 | Los Angeles |
+|    3 | Alice   |   22 | New York    |
+|    5 | Alice   |   22 | New York    |
+|    6 | Amit    |   27 | New York    |
+|    7 | Bobby   |   28 | Los Angeles |
+|    8 | AMartin |   39 | New York    |
+|   10 | Alice A |   32 | New York    |
++------+---------+------+-------------+
+
+9. AND: This operator is used to combine multiple conditions where both must be true. 
+
+ SELECT * FROM students WHERE name = 'Alice' AND city = 'New York';
++------+-------+------+----------+
+| id   | name  | age  | city     |
++------+-------+------+----------+
+|    1 | Alice |   22 | New York |
+|    3 | Alice |   22 | New York |
+|    5 | Alice |   22 | New York |
++------+-------+------+----------+
+
+10. OR: This operator is used to combine multiple conditions where at least one must be true. 
+
+ SELECT * FROM students WHERE name = 'Alice' OR name = 'Bob';
++------+-------+------+-------------+
+| id   | name  | age  | city        |
++------+-------+------+-------------+
+|    1 | Alice |   22 | New York    |
+|    2 | Bob   |   23 | Los Angeles |
+|    3 | Alice |   22 | New York    |
+|    5 | Alice |   22 | New York    |
++------+-------+------+-------------+
+11. IFNULL: This operator is used to return a specified value if the expression is NULL.
+
+SELECT name, IFNULL(age, 0) AS age FROM students;
++-----------+-----+
+| name      | age |
++-----------+-----+
+| Alice     |  22 |
+| Bob       |  23 |
+| Alice     |  22 |
+| Charlie   |  21 |
+| Alice     |  22 |
+| Amit      |  27 |
+| Bobby     |  28 |
+| AMartin   |  39 |
+| Charlie g |  31 |
+| Alice A   |  32 |
+| Amit      |  27 |
+| NULL      |  28 |
+| NULL      |  39 |
+| Charlie g |  31 |
+| Alice A   |  32 |
++-----------+-----+
+
+12. NOT NULL: This operator is used to select rows where a column is not NULL.
+
+SELECT * FROM students WHERE age IS NOT NULL;
++------+-----------+------+-------------+
+| id   | name      | age  | city        |
++------+-----------+------+-------------+
+|    1 | Alice     |   22 | New York    |
+|    2 | Bob       |   23 | Los Angeles |
+|    3 | Alice     |   22 | New York    |
+|    4 | Charlie   |   21 | Chicago     |
+|    5 | Alice     |   22 | New York    |
+|    6 | Amit      |   27 | New York    |
+|    7 | Bobby     |   28 | Los Angeles |
+|    8 | AMartin   |   39 | New York    |
+|    9 | Charlie g |   31 | Chicago     |
+|   10 | Alice A   |   32 | New York    |
+|   11 | Amit      |   27 | New York    |
+|   12 | NULL      |   28 | Los Angeles |
+|   13 | NULL      |   39 | New York    |
+|   14 | Charlie g |   31 | Chicago     |
+|   15 | Alice A   |   32 | New York    |
++------+-----------+------+-------------+
+
+13. NOT: Negates a condition.
+ SELECT * FROM students WHERE NOT city = 'New York';
++------+-----------+------+-------------+
+| id   | name      | age  | city        |
++------+-----------+------+-------------+
+|    2 | Bob       |   23 | Los Angeles |
+|    4 | Charlie   |   21 | Chicago     |
+|    7 | Bobby     |   28 | Los Angeles |
+|    9 | Charlie g |   31 | Chicago     |
+|   12 | NULL      |   28 | Los Angeles |
+|   14 | Charlie g |   31 | Chicago     |
++------+-----------+------+-------------+
+
+mysql>  SELECT * FROM students WHERE city IS NOT NULL;
++------+-----------+------+-------------+
+| id   | name      | age  | city        |
++------+-----------+------+-------------+
+|    1 | Alice     |   22 | New York    |
+|    2 | Bob       |   23 | Los Angeles |
+|    3 | Alice     |   22 | New York    |
+|    4 | Charlie   |   21 | Chicago     |
+|    5 | Alice     |   22 | New York    |
+|    6 | Amit      |   27 | New York    |
+|    7 | Bobby     |   28 | Los Angeles |
+|    8 | AMartin   |   39 | New York    |
+|    9 | Charlie g |   31 | Chicago     |
+|   10 | Alice A   |   32 | New York    |
+|   11 | Amit      |   27 | New York    |
+|   12 | NULL      |   28 | Los Angeles |
+|   13 | NULL      |   39 | New York    |
+|   14 | Charlie g |   31 | Chicago     |
+|   15 | Alice A   |   32 | New York    |
++------+-----------+------+-------------+
+
+14. EXISTS: Tests for the existence of any rows in a subquery.
+
+SELECT * FROM students s1 WHERE EXISTS (SELECT 1 FROM students s2 WHERE s1.name = s2.name AND s1.id != s2.id);
++------+-----------+------+----------+
+| id   | name      | age  | city     |
++------+-----------+------+----------+
+|    1 | Alice     |   22 | New York |
+|    3 | Alice     |   22 | New York |
+|    5 | Alice     |   22 | New York |
+|    6 | Amit      |   27 | New York |
+|    9 | Charlie g |   31 | Chicago  |
+|   10 | Alice A   |   32 | New York |
+|   11 | Amit      |   27 | New York |
+|   14 | Charlie g |   31 | Chicago  |
+|   15 | Alice A   |   32 | New York |
++------+-----------+------+---------
+
+15. ORDER BY: Sorts the result set based on one or more columns.
+
+ SELECT * FROM students ORDER BY age ASC;
++------+-----------+------+-------------+
+| id   | name      | age  | city        |
++------+-----------+------+-------------+
+|    4 | Charlie   |   21 | Chicago     |
+|    1 | Alice     |   22 | New York    |
+|    3 | Alice     |   22 | New York    |
+|    5 | Alice     |   22 | New York    |
+|    2 | Bob       |   23 | Los Angeles |
+|    6 | Amit      |   27 | New York    |
+|   11 | Amit      |   27 | New York    |
+|    7 | Bobby     |   28 | Los Angeles |
+|   12 | NULL      |   28 | Los Angeles |
+|    9 | Charlie g |   31 | Chicago     |
+|   14 | Charlie g |   31 | Chicago     |
+|   10 | Alice A   |   32 | New York    |
+|   15 | Alice A   |   32 | New York    |
+|    8 | AMartin   |   39 | New York    |
+|   13 | NULL      |   39 | New York    |
++------+-----------+------+-------------+
+
+16. LIMIT: Limits the number of rows returned by the query.
+
+ SELECT * FROM students ORDER BY age DESC LIMIT 2;
++------+---------+------+----------+
+| id   | name    | age  | city     |
++------+---------+------+----------+
+|    8 | AMartin |   39 | New York |
+|   13 | NULL    |   39 | New York |
++------+---------+------+----------+
+
+17. OFFSET: Specifies where to start returning rows from when using LIMIT for pagination.
+
+ SELECT * FROM students ORDER BY age DESC LIMIT 2 OFFSET 2;
++------+---------+------+----------+
+| id   | name    | age  | city     |
++------+---------+------+----------+
+|   10 | Alice A |   32 | New York |
+|   15 | Alice A |   32 | New York |
++------+---------+------+----------+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
+ 
+
+create database day4;
+mysql> use day4
+Database changed
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| day1               |
+| day2               |
+| day3               |
+| day4               |
+| debugshala         |
+| information_schema |
+| ishan              |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+12 rows in set (0.00 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> CREATE TABLE EMPLOYEE
+    ->             (
+    ->       EMPNO INT(4) primary key,
+    ->              ENAME varchar(10),
+    ->              JOB varchar(9),
+    ->              MGR INT(4),
+    ->              HIREDATE DATE,
+    ->              SAL DECIMAL(7, 2),
+    ->              COMM DECIMAL(7, 2),
+    ->              DEPTNO INT(2)
+    ->      );
+
+ show tables;
++----------------+
+| Tables_in_day4 |
++----------------+
+| employee       |
++----------------+
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    ->         (7369, 'SMITH',  'CLERK',     7902,
+    ->         STR_TO_DATE('17-DEC-1980', '%d-%b-%Y'),  800, NULL, 20);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    ->         (7499, 'ALLEN',  'SALESMAN',  7698,
+    ->         STR_TO_DATE('20-FEB-1981', '%d-%b-%Y'), 1600,  300, 30);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    ->         (7521, 'WARD',   'SALESMAN',  7698,
+    ->         STR_TO_DATE('22-FEB-1981', '%d-%b-%Y'), 1250,  500, 30);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    ->         (7566, 'JONES',  'MANAGER',   7839,
+    ->         STR_TO_DATE('2-APR-1981', '%d-%b-%Y'),  2975, NULL, 20);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    ->         (7654, 'MARTIN', 'SALESMAN',  7698,
+    ->         STR_TO_DATE('28-SEP-1981', '%d-%b-%Y'), 1250, 1400, 30);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    ->         (7698, 'BLAKE',  'MANAGER',   7839,
+    ->         STR_TO_DATE('1-MAY-1981', '%d-%b-%Y'),  2850, NULL, 30);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    ->         (7782, 'CLARK',  'MANAGER',   7839,
+    ->         STR_TO_DATE('9-JUN-1981', '%d-%b-%Y'),  2450, NULL, 10);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    ->         (7788, 'SCOTT',  'ANALYST',   7566,
+    ->         STR_TO_DATE('09-DEC-1982', '%d-%b-%Y'), 3000, NULL, 20);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    ->         (7839, 'KING',   'PRESIDENT', NULL,
+    ->         STR_TO_DATE('17-NOV-1981', '%d-%b-%Y'), 5000, NULL, 10);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    ->         (7844, 'TURNER', 'SALESMAN',  7698,
+    ->         STR_TO_DATE('8-SEP-1981', '%d-%b-%Y'),  1500,    0, 30);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    ->         (7876, 'ADAMS',  'CLERK',     7788,
+    ->         STR_TO_DATE('12-JAN-1983', '%d-%b-%Y'), 1100, NULL, 20);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    ->         (7900, 'JAMES',  'CLERK',     7698,
+    ->         STR_TO_DATE('3-DEC-1981', '%d-%b-%Y'),   950, NULL, 30);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    ->         (7902, 'FORD',   'ANALYST',   7566,
+    ->         STR_TO_DATE('3-DEC-1981', '%d-%b-%Y'),  3000, NULL, 20);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    ->         (7934, 'MILLER', 'CLERK',     7782,
+    ->         STR_TO_DATE('23-JAN-1982', '%d-%b-%Y'), 1300, NULL, 10);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select* from employee;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+   
+
+1. Retrieve the details (Name, Salary and dept no) of the emp who are working in department code 20
+ select ename,sal,deptno from employee where deptno = 20;
++-------+---------+--------+
+| ename | sal     | deptno |
++-------+---------+--------+
+| SMITH |  800.00 |     20 |
+| JONES | 2975.00 |     20 |
+| SCOTT | 3000.00 |     20 |
+| ADAMS | 1100.00 |     20 |
+| FORD  | 3000.00 |     20 |
++-------+---------+--------+
+
+2.  Display all records whose job is only ANALYST and SALESMAN.
+
+SELECT *FROM employee
+WHERE job IN ('ANALYST', 'SALESMAN');
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
++-------+--------+----------+------+------------+---------+---------+--------+
+3.Display all employees who have joined after 9th june 1981.
+
+SELECT *FROM employee
+WHERE hiredate > '1981-06-09';
++-------+--------+-----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+
+4.Retrieve the names of all employees who are not managers.
+SELECT ename,empno
+    -> FROM employee
+    -> WHERE job <> 'MANAGER';
++--------+-------+
+| ename  | empno |
++--------+-------+
+| SMITH  |  7369 |
+| ALLEN  |  7499 |
+| WARD   |  7521 |
+| MARTIN |  7654 |
+| SCOTT  |  7788 |
+| KING   |  7839 |
+| TURNER |  7844 |
+| ADAMS  |  7876 |
+| JAMES  |  7900 |
+| FORD   |  7902 |
+| MILLER |  7934 |
++--------+-------+
+
+5. List all employees who are analysts.
+
+select * from employee
+    -> where job = "analyst";
++-------+-------+---------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7788 | SCOTT | ANALYST | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+
+6. Find employees who were hired between 1980 and 1982.
+
+SELECT *
+FROM employee
+WHERE hiredate BETWEEN '1980-01-01' AND '1982-12-31';
++-------+--------+-----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+
+7. 7.Retrieve employees who work in departments 20, 30, or 10.
+
+SELECT *
+    -> FROM employee
+    -> WHERE deptno IN (10, 20, 30);
++-------+--------+-----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+ 
+8.Retrieve employees whose salary is between $2000 and $3000.
+
+ SELECT * FROM employee WHERE sal BETWEEN 2000 AND 3000;
++-------+-------+---------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE | MANAGER | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7788 | SCOTT | ANALYST | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+
+9.Find employees who are not managers.using !- operator.
+SELECT * FROM employee
+    -> WHERE NOT job = 'MANAGER';
++-------+--------+-----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+
+10.Find employees whose manager is not assigned.using IS operator
+
+SELECT *FROM employee
+    -> WHERE mgr  IS NULL;
++-------+-------+-----------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
++-------+-------+-----------+------+------------+---------+------+--------+
+
+11. Find employees who are clerks or analysts.using OR operator.
+
+ select * from employee
+    -> where job = "clerk" or job = "analyst";
++-------+--------+---------+------+------------+---------+------+--------+
+| EMPNO | ENAME  | JOB     | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+--------+---------+------+------------+---------+------+--------+
+|  7369 | SMITH  | CLERK   | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7788 | SCOTT  | ANALYST | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7876 | ADAMS  | CLERK   | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7900 | JAMES  | CLERK   | 7698 | 1981-12-03 |  950.00 | NULL |     30 |
+|  7902 | FORD   | ANALYST | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
+|  7934 | MILLER | CLERK   | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+---------+------+------------+---------+------+--------+
+
+12. Display empno, empname,sal, comm and total salary. (Check for null values before calculations)  Total Salary = comm + sal;
+
+13. Find employees with assigned manager
+ SELECT * from employee
+    -> WHERE MGR IS NOT NULL;
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER  | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+
+14.Sort employees by salary in descending order.
+
+SELECT * FROM employee ORDER BY SAL desc;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+
+15.Get the top 5 highest-paid employees.
+
+ SELECT * FROM employee
+    -> ORDER BY sal DESC
+    -> LIMIT 5;
++-------+-------+-----------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7788 | SCOTT | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
+|  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE | MANAGER   | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
++-------+-------+-----------+------+------------+---------+------+--------+
+
+16. Skip the first 3 records and fetch the next 5 employees.
+
+SELECT *FROM employee
+OFFSET 3
+LIMIT 5;
+
+17.Combine employees from departments 10 and 20,removing duplicates.
+
+ SELECT *FROM employee
+    -> WHERE deptno = 10
+    ->
+    -> UNION
+    ->
+    -> SELECT *FROM employee
+    -> WHERE deptno = 20;
++-------+--------+-----------+------+------------+---------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+--------+-----------+------+------------+---------+------+--------+
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+--------+-----------+------+------------+---------+------+--------+
+
+18.Combine employees from departments 10 and 20, keeping duplicate
+
+SELECT *
+    -> FROM employee
+    -> WHERE deptno = 10
+    ->
+    -> UNION ALL
+    ->
+    -> SELECT *
+    -> FROM employee
+    -> WHERE deptno = 20;
++-------+--------+-----------+------+------------+---------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+--------+-----------+------+------------+---------+------+--------+
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+--------+-----------+------+------------+---------+------+--------+
+
+
+19.Find employees who are both managers and analysts.This query retrieves employees who hold both managerial and analyst positions.
+SELECT empno, ename
+    -> FROM employee
+    -> WHERE job = 'MANAGER'
+    ->
+    -> INTERSECT
+    ->
+    -> SELECT empno, ename
+    -> FROM employee
+    -> WHERE job = 'ANALYST';
+Empty set (0.00 sec)
+
+20.Write a query to Select employees whose job is 'SALESMAN' and department number is 30.
+SELECT *
+    -> FROM employee
+    -> WHERE job = 'SALESMAN' AND deptno = 30;
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
++-------+--------+----------+------+------------+---------+---------+--------+
+4 rows in set (0.00 sec)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+							7.Restricting records and sorting.
+							chapter 7 assignment question
+
+
+1.I want to display m name persons
+Select * from employee where ename like 'm%';
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+
+                     or
+
+select * from employee where ename regexp'^m';
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+2 rows in set (0.01 sec)
+
+2.I want to display 3 name character at l in person name.
+
+select * from employee where ename like'_l%';
++-------+-------+----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7698 | BLAKE | MANAGER  | 7839 | 1981-05-01 | 2850.00 |   NULL |     30 |
+|  7782 | CLARK | MANAGER  | 7839 | 1981-06-09 | 2450.00 |   NULL |     10 |
++-------+-------+----------+------+------------+---------+--------+--------+
+
+
+3.I want to display last character with n.
+
+select * from employee where ename regexp 'n$';
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
++-------+--------+----------+------+------------+---------+---------+--------+
+
+4.I want to display end with r or end with n.
+
+select * from employee where ename like '%r' or ename like '%n';
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+
+5. I want to display start with a and end with n.
+
+select * from employee where ename like 'a%' or ename like '%n';
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
++-------+--------+----------+------+------------+---------+---------+--------+
+
+6. i want to display n occur anywhere in ename.
+ Select * from employee where ename regexp '.*n.*';
++-------+--------+-----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+
+7..I want to display Start with a or m or s.
+
+  Select * from employee where ename regexp '^[AMS]';
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+
+8.not start with a m s 
+
+ Select * from employee where ename regexp '^[^AMS]';
++-------+--------+-----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+--------+-----------+------+------------+---------+--------+--------+
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 | 500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |   NULL |     20 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |   NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |   NULL |     10 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |   NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |   0.00 |     30 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |   NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |   NULL |     20 |
++-------+--------+-----------+------+------------+---------+--------+--------+
+
+9.start with m , l at 3rd pos or end with r
+Select * from employee where ename regexp '^M.L.*r$';
++-------+--------+-------+------+------------+---------+------+--------+
+| EMPNO | ENAME  | JOB   | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+--------+-------+------+------------+---------+------+--------+
+|  7934 | MILLER | CLERK | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+-------+------+------------+---------+------+--------+
+
+10.start w end d or start t and end r.
+
+ SELECT *
+    -> FROM employee
+    -> WHERE ename REGEXP '^(w.*d|t.*r)$';
++-------+--------+----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+--------+----------+------+------------+---------+--------+--------+
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 | 500.00 |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |   0.00 |     30 |
++-------+--------+----------+------+------------+---------+--------+--------+
+
+11.Select employees whose names start with 'A' or 'J' and end with 'S':
+ SELECT *
+    -> FROM EMPLOYEE
+    -> WHERE ENAME REGEXP '^(A|J).*S$';
++-------+-------+---------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7876 | ADAMS | CLERK   | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7900 | JAMES | CLERK   | 7698 | 1981-12-03 |  950.00 | NULL |     30 |
++-------+-------+---------+------+------------+---------+------+--------+
+
+12.Display employees whose job contains 'MAN' anywhere in the job title:
+ SELECT *
+    -> FROM EMPLOYEE
+    -> WHERE JOB REGEXP 'MAN';
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER  | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
++-------+--------+----------+------+------------+---------+---------+--------+
+
+13.Select employees whose names start with a vowel:
+ SELECT *
+    -> FROM EMPLOYEE
+    -> WHERE ENAME REGEXP '^[AEIOU]';
++-------+-------+----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7876 | ADAMS | CLERK    | 7788 | 1983-01-12 | 1100.00 |   NULL |     20 |
++-------+-------+----------+------+------------+---------+--------+--------+
+
+14.Display employees whose names contain exactly five characters:
+SELECT *
+    -> FROM EMPLOYEE
+    -> WHERE ENAME REGEXP '^.....$';
++-------+-------+----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7369 | SMITH | CLERK    | 7902 | 1980-12-17 |  800.00 |   NULL |     20 |
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7566 | JONES | MANAGER  | 7839 | 1981-04-02 | 2975.00 |   NULL |     20 |
+|  7698 | BLAKE | MANAGER  | 7839 | 1981-05-01 | 2850.00 |   NULL |     30 |
+|  7782 | CLARK | MANAGER  | 7839 | 1981-06-09 | 2450.00 |   NULL |     10 |
+|  7788 | SCOTT | ANALYST  | 7566 | 1982-12-09 | 3000.00 |   NULL |     20 |
+|  7876 | ADAMS | CLERK    | 7788 | 1983-01-12 | 1100.00 |   NULL |     20 |
+|  7900 | JAMES | CLERK    | 7698 | 1981-12-03 |  950.00 |   NULL |     30 |
++-------+-------+----------+------+------------+---------+--------+--------+
+
+15.Select employees whose names start with 'S' and have at least three characters after 'S':
+SELECT *
+    -> FROM EMPLOYEE
+    -> WHERE ENAME REGEXP '^S..';
++-------+-------+---------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7369 | SMITH | CLERK   | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
+|  7788 | SCOTT | ANALYST | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+
+16.Display employees whose names contain 'A' or 'E' followed by 'L' or 'N':
+SELECT *
+    -> FROM EMPLOYEE
+    -> WHERE ENAME REGEXP '[AE][LN]';
++-------+-------+----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME | JOB      | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
++-------+-------+----------+------+------------+---------+--------+--------+
+
+17.Select employees whose job titles are exactly nine characters long:
+ SELECT *
+    -> FROM EMPLOYEE
+    -> WHERE JOB REGEXP '^.{9}$';
++-------+-------+-----------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
++-------+-------+-----------+------+------------+---------+------+--------+
+1 row in set (0.00 sec)
+
+18.Display employees whose names end with 'S' and have at least five characters:
+
+ SELECT *
+    -> FROM EMPLOYEE
+    -> WHERE ENAME REGEXP '.{5,}S$';
+Empty set (0.00 sec)
+
+19.Select employees whose names contain at least two vowels:
+SELECT *
+    -> FROM EMPLOYEE
+    -> WHERE ENAME REGEXP '[AEIOU].*[AEIOU]';
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+
+20.Display employees whose names do not contain the letter 'T':
+
+SELECT *
+    -> FROM EMPLOYEE
+    -> WHERE ENAME NOT REGEXP 'T';
++-------+--------+-----------+------+------------+---------+--------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM   | DEPTNO |
++-------+--------+-----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 | 500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |   NULL |     20 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |   NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |   NULL |     10 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |   NULL |     10 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |   NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |   NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |   NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |   NULL |     10 |
++-------+--------+-----------+------+------------+---------+--------+--------+
+
+ 

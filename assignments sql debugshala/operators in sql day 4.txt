@@ -1,0 +1,257 @@
+list of operators in sql 
+
+
+
+1. SELECT: Retrieves data from one or more table
+   select * from student;
++-----+-------+-----------------+--------+--------------------------+------+
+| sId | sname | saddress        | scity  | semail                   | age  |
++-----+-------+-----------------+--------+--------------------------+------+
+|   1 | ishan | shanti nagar    | indore | ishanbhatt1234@gmail.com |   21 |
+|   2 | manas | prashanti nagar | indore | manasj1234@gmail.com     |   23 |
+|   3 | sumit | kali nagar      | indore | sumitr1234@gmail.com     |   23 |
+|   4 | priya | geeta nagar     | indore | priyarani1234@gmail.com  |   19 |
+|   5 | geeta | priya nagar     | indore | geetanjali1234@gmail.com |   15 |
++-----+-------+-----------------+--------+--------------------------+------+
+
+2.  DISTINCT: Returns unique values in the result set.
+
+ SELECT DISTINCT name, age FROM students;
++---------+------+
+| name    | age  |
++---------+------+
+| Alice   |   22 |
+| Bob     |   23 |
+| Charlie |   21 |
+
+3.FROM: Specifies the table(s) from which to retrieve data.
+
+ select * from students;
++------+---------+------+-------------+
+| id   | name    | age  | city        |
++------+---------+------+-------------+
+|    1 | Alice   |   22 | New York    |
+|    2 | Bob     |   23 | Los Angeles |
+|    3 | Alice   |   22 | New York    |
+|    4 | Charlie |   21 | Chicago     |
+|    5 | Alice   |   22 | New York    |
++------+---------+------+-------------+
+4. WHERE: Filters rows based on specified conditions.
+
+select * from students where id = 2;
++------+------+------+-------------+
+| id   | name | age  | city        |
++------+------+------+-------------+
+|    2 | Bob  |   23 | Los Angeles |
++------+------+------+-------------+
+
+5. <>: This operator is used to negate a condition
+
+ SELECT * FROM students WHERE city <> 'New York';
++------+---------+------+-------------+
+| id   | name    | age  | city        |
++------+---------+------+-------------+
+|    2 | Bob     |   23 | Los Angeles |
+|    4 | Charlie |   21 | Chicago     |
++------+---------+------+-------------+
+ 
+6. IS: This operator is used for checking if a value is NULL.
+
+ SELECT * FROM students WHERE city IS NULL;
+Empty set (0.00 sec)
+
+
+7. BETWEEN: This operator is used to select values within a specified range.
+
+ SELECT * FROM students WHERE age BETWEEN 20 AND 25;
++------+---------+------+-------------+
+| id   | name    | age  | city        |
++------+---------+------+-------------+
+|    1 | Alice   |   22 | New York    |
+|    2 | Bob     |   23 | Los Angeles |
+|    3 | Alice   |   22 | New York    |
+|    4 | Charlie |   21 | Chicago     |
+|    5 | Alice   |   22 | New York    |
++------+---------+------+-------------+
+
+8. IN: This operator is used to specify multiple possible values for a column.
+ SELECT * FROM students WHERE city IN ('New York', 'Los Angeles');
++------+---------+------+-------------+
+| id   | name    | age  | city        |
++------+---------+------+-------------+
+|    1 | Alice   |   22 | New York    |
+|    2 | Bob     |   23 | Los Angeles |
+|    3 | Alice   |   22 | New York    |
+|    5 | Alice   |   22 | New York    |
+|    6 | Amit    |   27 | New York    |
+|    7 | Bobby   |   28 | Los Angeles |
+|    8 | AMartin |   39 | New York    |
+|   10 | Alice A |   32 | New York    |
++------+---------+------+-------------+
+
+9. AND: This operator is used to combine multiple conditions where both must be true. 
+
+ SELECT * FROM students WHERE name = 'Alice' AND city = 'New York';
++------+-------+------+----------+
+| id   | name  | age  | city     |
++------+-------+------+----------+
+|    1 | Alice |   22 | New York |
+|    3 | Alice |   22 | New York |
+|    5 | Alice |   22 | New York |
++------+-------+------+----------+
+
+10. OR: This operator is used to combine multiple conditions where at least one must be true. 
+
+ SELECT * FROM students WHERE name = 'Alice' OR name = 'Bob';
++------+-------+------+-------------+
+| id   | name  | age  | city        |
++------+-------+------+-------------+
+|    1 | Alice |   22 | New York    |
+|    2 | Bob   |   23 | Los Angeles |
+|    3 | Alice |   22 | New York    |
+|    5 | Alice |   22 | New York    |
++------+-------+------+-------------+
+11. IFNULL: This operator is used to return a specified value if the expression is NULL.
+
+SELECT name, IFNULL(age, 0) AS age FROM students;
++-----------+-----+
+| name      | age |
++-----------+-----+
+| Alice     |  22 |
+| Bob       |  23 |
+| Alice     |  22 |
+| Charlie   |  21 |
+| Alice     |  22 |
+| Amit      |  27 |
+| Bobby     |  28 |
+| AMartin   |  39 |
+| Charlie g |  31 |
+| Alice A   |  32 |
+| Amit      |  27 |
+| NULL      |  28 |
+| NULL      |  39 |
+| Charlie g |  31 |
+| Alice A   |  32 |
++-----------+-----+
+
+12. NOT NULL: This operator is used to select rows where a column is not NULL.
+
+SELECT * FROM students WHERE age IS NOT NULL;
++------+-----------+------+-------------+
+| id   | name      | age  | city        |
++------+-----------+------+-------------+
+|    1 | Alice     |   22 | New York    |
+|    2 | Bob       |   23 | Los Angeles |
+|    3 | Alice     |   22 | New York    |
+|    4 | Charlie   |   21 | Chicago     |
+|    5 | Alice     |   22 | New York    |
+|    6 | Amit      |   27 | New York    |
+|    7 | Bobby     |   28 | Los Angeles |
+|    8 | AMartin   |   39 | New York    |
+|    9 | Charlie g |   31 | Chicago     |
+|   10 | Alice A   |   32 | New York    |
+|   11 | Amit      |   27 | New York    |
+|   12 | NULL      |   28 | Los Angeles |
+|   13 | NULL      |   39 | New York    |
+|   14 | Charlie g |   31 | Chicago     |
+|   15 | Alice A   |   32 | New York    |
++------+-----------+------+-------------+
+
+13. NOT: Negates a condition.
+ SELECT * FROM students WHERE NOT city = 'New York';
++------+-----------+------+-------------+
+| id   | name      | age  | city        |
++------+-----------+------+-------------+
+|    2 | Bob       |   23 | Los Angeles |
+|    4 | Charlie   |   21 | Chicago     |
+|    7 | Bobby     |   28 | Los Angeles |
+|    9 | Charlie g |   31 | Chicago     |
+|   12 | NULL      |   28 | Los Angeles |
+|   14 | Charlie g |   31 | Chicago     |
++------+-----------+------+-------------+
+
+mysql>  SELECT * FROM students WHERE city IS NOT NULL;
++------+-----------+------+-------------+
+| id   | name      | age  | city        |
++------+-----------+------+-------------+
+|    1 | Alice     |   22 | New York    |
+|    2 | Bob       |   23 | Los Angeles |
+|    3 | Alice     |   22 | New York    |
+|    4 | Charlie   |   21 | Chicago     |
+|    5 | Alice     |   22 | New York    |
+|    6 | Amit      |   27 | New York    |
+|    7 | Bobby     |   28 | Los Angeles |
+|    8 | AMartin   |   39 | New York    |
+|    9 | Charlie g |   31 | Chicago     |
+|   10 | Alice A   |   32 | New York    |
+|   11 | Amit      |   27 | New York    |
+|   12 | NULL      |   28 | Los Angeles |
+|   13 | NULL      |   39 | New York    |
+|   14 | Charlie g |   31 | Chicago     |
+|   15 | Alice A   |   32 | New York    |
++------+-----------+------+-------------+
+
+14. EXISTS: Tests for the existence of any rows in a subquery.
+
+SELECT * FROM students s1 WHERE EXISTS (SELECT 1 FROM students s2 WHERE s1.name = s2.name AND s1.id != s2.id);
++------+-----------+------+----------+
+| id   | name      | age  | city     |
++------+-----------+------+----------+
+|    1 | Alice     |   22 | New York |
+|    3 | Alice     |   22 | New York |
+|    5 | Alice     |   22 | New York |
+|    6 | Amit      |   27 | New York |
+|    9 | Charlie g |   31 | Chicago  |
+|   10 | Alice A   |   32 | New York |
+|   11 | Amit      |   27 | New York |
+|   14 | Charlie g |   31 | Chicago  |
+|   15 | Alice A   |   32 | New York |
++------+-----------+------+---------
+
+15. ORDER BY: Sorts the result set based on one or more columns.
+
+ SELECT * FROM students ORDER BY age ASC;
++------+-----------+------+-------------+
+| id   | name      | age  | city        |
++------+-----------+------+-------------+
+|    4 | Charlie   |   21 | Chicago     |
+|    1 | Alice     |   22 | New York    |
+|    3 | Alice     |   22 | New York    |
+|    5 | Alice     |   22 | New York    |
+|    2 | Bob       |   23 | Los Angeles |
+|    6 | Amit      |   27 | New York    |
+|   11 | Amit      |   27 | New York    |
+|    7 | Bobby     |   28 | Los Angeles |
+|   12 | NULL      |   28 | Los Angeles |
+|    9 | Charlie g |   31 | Chicago     |
+|   14 | Charlie g |   31 | Chicago     |
+|   10 | Alice A   |   32 | New York    |
+|   15 | Alice A   |   32 | New York    |
+|    8 | AMartin   |   39 | New York    |
+|   13 | NULL      |   39 | New York    |
++------+-----------+------+-------------+
+
+16. LIMIT: Limits the number of rows returned by the query.
+
+ SELECT * FROM students ORDER BY age DESC LIMIT 2;
++------+---------+------+----------+
+| id   | name    | age  | city     |
++------+---------+------+----------+
+|    8 | AMartin |   39 | New York |
+|   13 | NULL    |   39 | New York |
++------+---------+------+----------+
+
+17. OFFSET: Specifies where to start returning rows from when using LIMIT for pagination.
+
+ SELECT * FROM students ORDER BY age DESC LIMIT 2 OFFSET 2;
++------+---------+------+----------+
+| id   | name    | age  | city     |
++------+---------+------+----------+
+|   10 | Alice A |   32 | New York |
+|   15 | Alice A |   32 | New York |
++------+---------+------+----------+
+
+
+18.  
+
+

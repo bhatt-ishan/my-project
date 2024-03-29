@@ -1,0 +1,611 @@
+
+1.Create table employee having empno as int , employename , address , salary as varchar datatype .
+
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| debugshala         |
+| information_schema |
+| ishan              |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+
+mysql> CREATE DATABASE DAY1;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| day1               |
+| debugshala         |
+| information_schema |
+| ishan              |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+mysql> USE DAY1;
+Database changed
+
+mysql> CREATE TABLE Employee(
+    -> employeeNo int,
+    -> employeename varchar(20), 
+    -> employeeAddress varchar(40),
+    -> employeesalary Decimal(5,2)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_day1 |
++----------------+
+| employee       |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> Desc employee;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| employeeNo      | int          | YES  |     | NULL    |       |
+| employeename    | varchar(20)  | YES  |     | NULL    |       |
+| employeeAddress | varchar(40)  | YES  |     | NULL    |       |
+| employeesalary  | decimal(5,2) | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+Q2. Insert 5 records according to you in the employee table and make ensure that sallary greater than 1000 to all employee?
+
+mysql> INSERT INTO employee
+    -> values (1,'vishal','shanti nagar indore',200,10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee
+    -> values (2,"anand","prem nagar indore",500);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee
+    -> values (3,"sahil","ashok nagar indore",900);
+Query OK, 1 row affected (0.01 sec)
+mysql> INSERT INTO employee
+    -> values (4,"rohit","vijay nagar indore",800);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee
+    -> values (5,"swapnil","udaay nagar indore",300);
+Query OK, 1 row affected (0.00 sec)
+
+
+
+Q3. Describe the table employee structure.
+Desc employee;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| employeeNo      | int          | YES  |     | NULL    |       |
+| employeename    | varchar(20)  | YES  |     | NULL    |       |
+| employeeAddress | varchar(40)  | YES  |     | NULL    |       |
+| employeesalary  | decimal(5,2) | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+
+Q4. 4.Create a dummy table names dummy_emp as an employee.
+mysql> create table duumyemp as select * from employee;
+
+
+Q5. For display table employee data which cmd is used.
+
+
+Q6.Create table customers having customerId int , customer_name varchar(30) , conact_name varchar(30) , address varchar(120) , postal_code as int and country varchar(40) .
+
+mysql> CREATE TABLE CUSTOMERS(
+    -> customerId int,
+    -> customerName varchar(30),
+    -> customercontactName varchar(30),
+    -> customerAddress varchar(120),
+    -> postalcode int,
+    -> country varchar(40)
+    -> );
+
+Q7. 7.Insert 5 records according to you in the customers table
+
+mysql> INSERT INTO CUSTOMERS
+    -> Values(1,"lalit","subash","shanti nagar indore",457226,"india");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO CUSTOMERS
+    -> Values(2,"lalita","subhangi","kirti nagar indore",457331,"india");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO CUSTOMERS
+    -> Values(3,"manas","tom","vijay nagar indore",423568,"india");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO CUSTOMERS
+    -> Values(4,"ishan","lala","shastri nagar indore",548965,"india");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO CUSTOMERS
+    -> Values(5,"kavita","salar","geeta nagar indore",589654,"india");
+Query OK, 1 row affected (0.01 sec)
+
+Q8.Describe the table customers structure.
+
+
+mysql> DESC customers;
++---------------------+--------------+------+-----+---------+-------+
+| Field               | Type         | Null | Key | Default | Extra |
++---------------------+--------------+------+-----+---------+-------+
+| customerId          | int          | YES  |     | NULL    |       |
+| customerName        | varchar(30)  | YES  |     | NULL    |       |
+| customercontactName | varchar(30)  | YES  |     | NULL    |       |
+| customerAddress     | varchar(120) | YES  |     | NULL    |       |
+| postalcode          | int          | YES  |     | NULL    |       |
+| country             | varchar(40)  | YES  |     | NULL    |       |
++---------------------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+Q10.For display table customers data which cmd is used.
+
+mysql> SELECT*FROM customers;
++------------+--------------+---------------------+----------------------+------------+---------+
+| customerId | customerName | customercontactName | customerAddress      | postalcode | country |
++------------+--------------+---------------------+----------------------+------------+---------+
+|          1 | lalit        | subash              | shanti nagar indore  |     457226 | india   |
+|          2 | lalita       | subhangi            | kirti nagar indore   |     457331 | india   |
+|          3 | manas        | tom                 | vijay nagar indore   |     423568 | india   |
+|          4 | ishan        | lala                | shastri nagar indore |     548965 | india   |
+|          5 | kavita       | salar               | geeta nagar indore   |     589654 | india   |
++------------+--------------+---------------------+----------------------+------------+---------+
+5 rows in set (0.00 sec)
+
+Q11.Suppose you add 500 incentive too all employee salary and show.
+
+mysql> SELECT  employeename, employeesalary+500 FROM employee;
++--------------+--------------------+
+| employeename | employeesalary+500 |
++--------------+--------------------+
+| vishal       |             700.00 |
+| anand        |            1000.00 |
+| sahil        |            1400.00 |
+| rohit        |            1300.00 |
+| swapnil      |             800.00 |
++--------------+--------------------+
+5 rows in set (0.00 sec)
+
+Q12. Create one table named employeeNotNullOperator where empid as int AUTO_INCREMENT PRIMARY KEY, ename as varchar(50) NOT NULL , address as varchar(80).
+
+ mysql> CREATE TABLE employeeNotNullOperator(
+    -> empid  int AUTO_INCREMENT PRIMARY KEY,
+    -> empname  varchar(50) NOT NULL,
+    -> empaddress varchar(80)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+Q13.  Insert 5 records according to you in the employee table and for that u did check that your not null constraint is working correct or not.
+
+
+mysql> INSERT INTO employeenotnulloperator
+    -> values(1,"sunil","shanti nagar indore");
+Query OK, 1 row affected (0.01 sec)
+mysql> INSERT INTO employeenotnulloperator
+    -> values(2,"suresh","kirti nagar indore");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employeenotnulloperator
+    -> values(3,"kamlesh","shubash nagar indore");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO employeenotnulloperator
+    -> values(4,"deepak","kamal nagar indore");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO employeenotnulloperator
+    -> values(5,"kamal","deepa nagar indore");
+Query OK, 1 row affected (0.00 sec)
+
+Q14.  Write a Query to Make use of  select cmd Suppose you add 500 incentive too all employee salary and display in employee tabel..
+
+mysql> SELECT  employeename, employeesalary+500 FROM employee;
++--------------+--------------------+
+| employeename | employeesalary+500 |
++--------------+--------------------+
+| vishal       |             700.00 |
+| anand        |            1000.00 |
+| sahil        |            1400.00 |
+| rohit        |            1300.00 |
+| swapnil      |             800.00 |
++--------------+--------------------+
+5 rows in set (0.00 sec)
+
+Q15. Write a Query to For doing an alias with all employee table column name what cmd is use to display their short names employename as Employee_name , address as Employee_address in employee tabel.
+
+
+mysql> SELECT employeename as "EmpName", employeeAddress as "EmpAddress" from employee;
++--------------+---------------------+
+| EmpName | EmpAddress     |
++--------------+---------------------+
+| vishal       | shanti nagar indore |
+| anand        | prem nagar indore   |
+| sahil        | ashok nagar indore  |
+| rohit        | vijay nagar indore  |
+| swapnil      | udaay nagar indore  |
++--------------+--------------------
+
+
+Q16.  Write a Query to Alter column deptno int in employee table which cmd is used to create this query in employee tabel..
+
+mysql> ALTER table employee
+    -> ADD  COLUMN deptno int;
+
+Q17. 17.Write a Query to Alter insert data in that deptno column and give every employee deptno 10,20,30 according to uh in employee tabel..
+
+mysql> update employee
+    -> set deptno = 10
+    -> where employeeNo = 1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee
+    -> set deptno = 20
+    -> where employeeNo = 2;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee
+    -> set deptno = 20
+    -> where employeeNo = 2;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql>
+mysql>  update employee
+    -> set deptno = 30
+    -> where employeeNo = 3;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>
+mysql>  update employee
+    -> set deptno = 20
+    -> where employeeNo = 4;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee
+    -> set deptno = 30
+    -> where employeeNo = 5;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
++------------+--------------+---------------------+----------------+--------+
+| employeeNo | employeename | employeeAddress     | employeesalary | deptno |
++------------+--------------+---------------------+----------------+--------+
+|          1 | vishal       | shanti nagar indore |         200.00 |     10 |
+|          2 | anand        | prem nagar indore   |         500.00 |     20 |
+|          3 | sahil        | ashok nagar indore  |         900.00 |     30 |
+|          4 | rohit        | vijay nagar indore  |         800.00 |     20 |
+|          5 | swapnil      | udaay nagar indore  |         300.00 |     30 |
++------------+--------------+---------------------+----------------+--------+
+
+
+Q18. Write a Query to list all rows with DeptId is 20 in employee tabel..
+
+Select * from employee where deptno=20;
+
+
+
+Q19. Write a Query to list all distinct Deptno in employee tabel..
+
+mysql> SELECT DISTINCT deptno from employee;
++--------+
+| deptno |
++--------+
+|     10 |
+|     20 |
+|     30 |
++--------+ 
+
+Q20. Write a Query to update employee name='arif' of id=2 in employee table..
+  
+      UPDATE employee
+    -> set employeename = "arif"
+    -> where employeeNo = 2;
++------------+--------------+---------------------+----------------+--------+
+| employeeNo | employeename | employeeAddress     | employeesalary | deptno |
++------------+--------------+---------------------+----------------+--------+
+|          1 | vishal       | shanti nagar indore |         200.00 |     10 |
+|          2 | arif         | prem nagar indore   |         500.00 |     20 |
+|          3 | sahil        | ashok nagar indore  |         900.00 |     30 |
+|          4 | rohit        | vijay nagar indore  |         800.00 |     20 |
+|          5 | swapnil      | udaay nagar indore  |         300.00 |     30 |
+
+Q21. Write a Query to Delete one employee whose salary is less in employee table.
+
+ DELETE FROM employee
+  where employeeNo = 1;
++------------+--------------+--------------------+----------------+--------+
+| employeeNo | employeename | employeeAddress    | employeesalary | deptno |
++------------+--------------+--------------------+----------------+--------+
+|          2 | arif         | prem nagar indore  |         500.00 |     20 |
+|          3 | sahil        | ashok nagar indore |         900.00 |     30 |
+|          4 | rohit        | vijay nagar indore |         800.00 |     20 |
+|          5 | swapnil      | udaay nagar indore |         300.00 |     30 |
++------------+--------------+--------------------+----------------+--------+
+
+
+Q22. Write a Query to Update employee address='Bharat nagar' whose id is 4 in employee table
+
+         UPDATE employee
+        set employeeAddress = "bharat nagar"
+       where employeeNo = 4;
+
+| employeeNo | employeename | employeeAddress    | employeesalary | deptno |
++------------+--------------+--------------------+----------------+--------+
+|          2 | arif         | prem nagar indore  |         500.00 |     20 |
+|          3 | sahil        | ashok nagar indore |         900.00 |     30 |
+|          4 | rohit        | bharat nagar       |         800.00 |     20 |
+|          5 | swapnil      | udaay nagar indore |         300.00 |     30 |
++------------+--------------+--------------------+----------------+--------+
+
+
+Q23. Write a Query to Add new column email varchar(40) in employee table.
+ 
+       ALTER table employee
+     ADD email varchar(40);
++------------+--------------+--------------------+----------------+--------+-------+
+| employeeNo | employeename | employeeAddress    | employeesalary | deptno | email |
++------------+--------------+--------------------+----------------+--------+-------+
+|          2 | arif         | prem nagar indore  |         500.00 |     20 | NULL  |
+|          3 | sahil        | ashok nagar indore |         900.00 |     30 | NULL  |
+|          4 | rohit        | bharat nagar       |         800.00 |     20 | NULL  |
+|          5 | swapnil      | udaay nagar indore |         300.00 |     30 | NULL  |
++------------+--------------+--------------------+----------------+--------+-------+
+
+Q24. Write a Query to Add data in email column according to uh data should in proper format like:- abc@123gmail.com in employee table.
+
+
+         update employee
+         set email = "arif1234@gamil.com"
+         where employeeNo =2;
+
+
+          update employee
+          set email = "sahil234@gamil.com"
+          where employeeNo =3;
+
+         update employee
+         set email = "rohit567@gamil.com"
+            where employeeNo =4;
+
+
+ 	update employee
+        set email = "swapnil789@gamil.com"
+         where employeeNo =5;
++------------+--------------+--------------------+----------------+--------+----------------------+
+| employeeNo | employeename | employeeAddress    | employeesalary | deptno | email                |
++------------+--------------+--------------------+----------------+--------+----------------------+
+|          2 | arif         | prem nagar indore  |         500.00 |     20 | arif1234@gamil.com   |
+|          3 | sahil        | ashok nagar indore |         900.00 |     30 | sahil234@gamil.com   |
+|          4 | rohit        | bharat nagar       |         800.00 |     20 | rohit567@gamil.com   |
+|          5 | swapnil      | udaay nagar indore |         300.00 |     30 | swapnil789@gamil.com |
++------------+--------------+--------------------+----------------+--------+----------------------+
+
+Q25. Write a Query to Modify this existing email column data type increase the varchar size 40 to 60 in employee table..
+ 
+    ALTER table employee
+    MODIFY column email varchar(60);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+Q26. Write a Query to Rename column email as emailID in employee table..
+
+ ALTER table employee RENAME column email to emailId;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
++------------+--------------+--------------------+----------------+--------+----------------------+
+| employeeNo | employeename | employeeAddress    | employeesalary | deptno | emailId              |
++------------+--------------+--------------------+----------------+--------+----------------------+
+|          2 | arif         | prem nagar indore  |         500.00 |     20 | arif1234@gamil.com   |
+|          3 | sahil        | ashok nagar indore |         900.00 |     30 | sahil234@gamil.com   |
+|          4 | rohit        | bharat nagar       |         800.00 |     20 | rohit567@gamil.com   |
+|          5 | swapnil      | udaay nagar indore |         300.00 |     30 | swapnil789@gamil.com |
++------------+--------------+--------------------+----------------+--------+----------------------+
+
+Q27. Write a Query to Update salary =5000 where id =5 in employee table.
+
+ update employee
+    -> set employeesalary = 500
+    -> where employeeNo = 5;
+
++------------+--------------+--------------------+----------------+--------+----------------------+
+| employeeNo | employeename | employeeAddress    | employeesalary | deptno | emailId              |
++------------+--------------+--------------------+----------------+--------+----------------------+
+|          2 | arif         | prem nagar indore  |         500.00 |     20 | arif1234@gamil.com   |
+|          3 | sahil        | ashok nagar indore |         900.00 |     30 | sahil234@gamil.com   |
+|          4 | rohit        | bharat nagar       |         800.00 |     20 | rohit567@gamil.com   |
+|          5 | swapnil      | udaay nagar indore |         500.00 |     30 | swapnil789@gamil.com |
++------------+--------------+--------------------+----------------+--------+----------------------+
+
+Q28. Write a Query to alter one column name gender varchar(20) in employee tabel.
+
+    ALTER TABLE employee
+    ->    Add gender varchar(20);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
++------------+--------------+--------------------+----------------+--------+----------------------+--------+
+| employeeNo | employeename | employeeAddress    | employeesalary | deptno | emailId              | gender |
++------------+--------------+--------------------+----------------+--------+----------------------+--------+
+|          2 | arif         | prem nagar indore  |         500.00 |     20 | arif1234@gamil.com   | NULL   |
+|          3 | sahil        | ashok nagar indore |         900.00 |     30 | sahil234@gamil.com   | NULL   |
+|          4 | rohit        | bharat nagar       |         800.00 |     20 | rohit567@gamil.com   | NULL   |
+|          5 | swapnil      | udaay nagar indore |         500.00 |     30 | swapnil789@gamil.com | NULL   |
++------------+--------------+--------------------+----------------+--------+----------------------+--------+
+
+
+Q29. Write a Query to insert data in that column gender.
+
+      
+	
+   mysql> update employee
+    ->          set gender = "male"
+    ->          where employeeNo =2;
+
+
+   mysql>  update employee
+    ->          set gender = "male"
+    ->          where employeeNo =3;
+
+   mysql> update employee
+    ->          set gender = "male"
+    ->          where employeeNo =4;
+
+   mysql>    update employee
+    ->          set gender = "male"
+    ->          where employeeNo =5;
+
++------------+--------------+--------------------+----------------+--------+----------------------+--------+
+| employeeNo | employeename | employeeAddress    | employeesalary | deptno | emailId              | gender |
++------------+--------------+--------------------+----------------+--------+----------------------+--------+
+|          2 | arif         | prem nagar indore  |         500.00 |     20 | arif1234@gamil.com   | male   |
+|          3 | sahil        | ashok nagar indore |         900.00 |     30 | sahil234@gamil.com   | male   |
+|          4 | rohit        | bharat nagar       |         800.00 |     20 | rohit567@gamil.com   | male   |
+|          5 | swapnil      | udaay nagar indore |         500.00 |     30 | swapnil789@gamil.com | male   |
++------------+--------------+--------------------+----------------+--------+----------------------+--------+
+
+
+Q30.  Write a Query to delete data in that column gender not structure which cmd is used.
+
+
+
+
+
+
+
+
+Q37.Write a Query to display employee_id , employee_name in emp table.
+
+> select employeeNo , employeeName from employee;
++------------+--------------+
+| employeeNo | employeeName |
++------------+--------------+
+|          2 | arif         |
+|          3 | sahil        |
+|          4 | rohit        |
+|          5 | swapnil      |
++------------+--------------+
+
+
+
+Q38. Write a query to display customerId int , customer_name in customers table.
+
+ SELECT customerID,CustomerName from customers;
++------------+--------------+
+| customerID | CustomerName |
++------------+--------------+
+|          1 | lalit        |
+|          2 | lalita       |
+|          3 | manas        |
+|          4 | ishan        |
+|          5 | kavita       |
++------------+--------------+
+
+Q39. Write a Query to display increment in salary couln at 500 in emp table.
+  
+
+mysql> SELECT  employeename, employeesalary+500 FROM employee;
++--------------+--------------------+
+| employeename | employeesalary+500 |
++--------------+--------------------+
+| vishal       |             700.00 |
+| anand        |            1000.00 |
+| sahil        |            1400.00 |
+| rohit        |            1300.00 |
+| swapnil      |             800.00 |
++--------------+--------------------+
+
+
+
+
+Q  create table salesman and insert values in table and display the table.
+
+mysql> CREATE TABLE salesman(
+    -> salesid int,
+    -> salesName varchar(20),
+    -> city varchar(20),
+    -> experience int
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO salesman
+    -> values(10,"rajesh","mumbai",5);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO salesman
+    -> value(11,"seema","pune",8);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO salesman
+    -> values(12,"shailesh","nagpur",7);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSER INTO salesman
+    -> vlues(13,"rakhi","pune",2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSER INTO salesman
+vlues(13,"rakhi","pune",2)' at line 1
+mysql> INSER INTO salesman
+    -> values(13,"rakhi","pune",2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSER INTO salesman
+values(13,"rakhi","pune",2)' at line 1
+mysql> INSERT INTO salesman
+    -> values(13,"rakhi","pune",2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show tables;
++-------------------------+
+| Tables_in_day1          |
++-------------------------+
+| customers               |
+| employee                |
+| employeenotnulloperator |
+| salesman                |
++-------------------------+
+4 rows in set (0.00 sec)
+
+mysql> desc salesman;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| salesid    | int         | YES  |     | NULL    |       |
+| salesName  | varchar(20) | YES  |     | NULL    |       |
+| city       | varchar(20) | YES  |     | NULL    |       |
+| experience | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select*from salesman;
++---------+-----------+--------+------------+
+| salesid | salesName | city   | experience |
++---------+-----------+--------+------------+
+|      10 | rajesh    | mumbai |          5 |
+|      11 | seema     | pune   |          8 |
+|      12 | shailesh  | nagpur |          7 |
+|      13 | rakhi     | pune   |          2 |
++---------+-----------+--------+------------+
+
+ INSERT INTO CUSTOMERS
+    Values(6,"lalit","subash","shanti nagar indore",457226,"india");
+
+ INSERT INTO CUSTOMERS
+     Values(7,"manas","tom","vijay nagar indore",423568,"india");
+

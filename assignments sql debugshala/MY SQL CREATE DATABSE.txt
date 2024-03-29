@@ -1,0 +1,23 @@
+SHOWDATABASES;//For display all databases.
+CREATE DATABASE  DATABASE_NAME;
+USE DATABASE_NAME;
+SHOW TABLES;//EMPTY SET
+//FOR CREATING TABLE
+
+CREATE TABLE Customers(
+    CustomerID int,
+    CustomerName varchar(80),
+    Addressvarchar(200),
+    PostalCode int);
+
+//for describing my table
+DESC customers;
+
+// for creating a dummy table which is creates using already excisting table.
+CREATE TABLE dummyCustomeras AS
+SELECT*FROM customers;
+
+// for creating dummy table as some column in old tables
+CREATE TABLE dummy customers1 AS
+SELECT   customerId, customerName FROM customers;
+		   
